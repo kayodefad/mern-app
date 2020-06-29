@@ -6,24 +6,26 @@ module.exports = (model) => {
     const startIndex = (page - 1) * limit
     const endIndex = page * limit
 
-    const results = {}
+    // const results = {}
 
-    if (endIndex < model.length) {
-      results.next = {
-        page: page + 1,
-        limit
-      }
-    }
+    // if (endIndex < model.length) {
+    //   results.next = {
+    //     page: page + 1,
+    //     limit
+    //   }
+    // }
 
-    if (startIndex > 0) {
-      results.previous = {
-        page: page - 1,
-        limit
-      }
-    }
+    // if (startIndex > 0) {
+    //   results.previous = {
+    //     page: page - 1,
+    //     limit
+    //   }
+    // }
 
     try {
-      results.results = await model.find().limit(limit).skip(startIndex).exec()
+      const results = await model.find().sort({
+        createdAt: -1
+      }).limit(limit).skip(startIndex).exec()
       res.paginatedResults = results
       next()
     } catch (e) {

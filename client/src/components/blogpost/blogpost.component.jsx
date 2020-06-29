@@ -19,7 +19,7 @@ const Blogpost = props => {
     <div className="blogpost mt-4">
       <h3>{props.title}</h3>
       <div className="owner">
-        <p className="mb-1">{props.owner}</p>
+        <p className="mb-1">Posted By <strong><em>{props.owner}</em></strong></p>
         <p>{datePosted}</p>
       </div>
       <p>{props.body.slice(0, 200)}</p>

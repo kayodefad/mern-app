@@ -4,7 +4,9 @@ import {
 
 const initialState = {
   posts: [],
-  post: {}
+  post: {},
+  paginatedPosts: [],
+  activePage: 1
 }
 
 const postsReducer = (state = initialState, action) => {
@@ -17,8 +19,16 @@ const postsReducer = (state = initialState, action) => {
         return {
           ...state, post: action.payload
         }
-        default:
-          return state
+        case actionTypes.FETCH_PAGINATED_POSTS:
+          return {
+            ...state, paginatedPosts: action.payload
+          }
+          case actionTypes.SET_ACTIVE_PAGE:
+            return {
+              ...state, activePage: action.payload
+            }
+            default:
+              return state
   }
 }
 

@@ -3,14 +3,21 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
-import { fetchPosts } from '../../redux/post/post.actions';
+import { fetchPosts, fetchPaginatedPosts } from '../../redux/post/post.actions';
 import Blogpost from '../blogpost/blogpost.component';
 import Pagination from '../pagination/pagination.component';
-import Footer from '../footer/footer.component';
 
-const Dashboard = ({ user, fetchPosts, blogPosts }) => {
+const Dashboard = ({
+  user,
+  fetchPosts,
+  fetchPaginatedPosts,
+  blogPosts,
+  paginatedPosts,
+  activePage
+}) => {
   useEffect(() => {
     fetchPosts();
+    fetchPaginatedPosts(activePage);
   }, []);
 
   const { currentUser } = user;
@@ -29,10 +36,12 @@ const Dashboard = ({ user, fetchPosts, blogPosts }) => {
       <Link to="/newpost">
         <Button variant="primary">New Post</Button>
       </Link>
-      <Pagination posts={blogPosts} />
-      {blogPosts.map(post => (
+      <Pagination posts={blogPosts} fetchPaginatedPosts={fetchPaginatedPosts} />
+      <div>{`Showing ${activePage*3-2} to ${activePage * 3} of ${blogPosts.length} posts`}</div>
+      {paginatedPosts.map(post => (
         <Blogpost key={post._id} {...post} />
       ))}
+      <div className="mt-3">{`Showing ${activePage*3-2} to ${activePage * 3} of ${blogPosts.length} posts`}</div>
     </div>
   );
 };
@@ -42,13 +51,19 @@ Dashboard.propTypes = {
   fetchPosts: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ user, posts: { posts } }) => ({
+const mapStateToProps = ({
   user,
-  blogPosts: posts
+  posts: { posts, paginatedPosts, activePage }
+}) => ({
+  user,
+  blogPosts: posts,
+  paginatedPosts,
+  activePage
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchPosts: () => dispatch(fetchPosts())
+  fetchPosts: () => dispatch(fetchPosts()),
+  fetchPaginatedPosts: pageNumber => dispatch(fetchPaginatedPosts(pageNumber))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

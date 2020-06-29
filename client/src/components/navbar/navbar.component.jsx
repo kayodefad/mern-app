@@ -16,9 +16,14 @@ const NavBar = ({ user, logoutUser }) => {
         </Link>
         <Nav className="ml-auto">
           {user.isAuthenticated ? (
-            <Button onClick={() => logoutUser()} variant="primary" size="sm">
+            <>
+            {/* <Button variant="secondary" size="sm">
+              My Posts
+            </Button> */}
+            <Button className="ml-3" onClick={() => logoutUser()} variant="primary" size="sm">
               Logout
             </Button>
+              </>
           ) : (
             <>
               <Link to="/register">

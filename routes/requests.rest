@@ -1,1 +1,1 @@
-GET http://localhost:5000/api/posts/dummy?page=2&limit=3
+GET http://localhost:5000/api/posts/pages?page=2&limit=3
