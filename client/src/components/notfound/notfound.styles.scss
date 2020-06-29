@@ -1,0 +1,21 @@
+.NotFound {
+  background: #041927;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 200;
+  // color: #fff;
+  top: 0;
+  left: 0; 
+  
+  & .not-found-body {
+    background: #fff;
+    width: 90vw;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 10px
+  }
+}

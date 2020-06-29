@@ -13,6 +13,7 @@ import Singlepost from './components/singlepost/singlepost.component'
 import Myposts from './components/myposts/myposts.component'
 import Footer from './components/footer/footer.component'
 import Editpost from './components/editpost/editpost.component'
+import NotFound from './components/notfound/notfound.component'
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
         <PrivateRoute path='/singlepost/:id' component={Singlepost} />
         <PrivateRoute path='/myposts' component={Myposts} />
         <PrivateRoute path='/editpost/:id' component={Editpost} />
+        <Route path='*' component={NotFound} />
       </Switch>
     </div>
       <Footer />
