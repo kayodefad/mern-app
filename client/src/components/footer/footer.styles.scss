@@ -1,0 +1,12 @@
+.Footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #363535;
+  color: #fff;
+  height: 60px;
+
+  & a {
+    color: inherit
+  }
+}

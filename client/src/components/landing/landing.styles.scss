@@ -1,0 +1,51 @@
+.Landing {
+  // height: calc(100vh - 57px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 70px;
+
+  & .code-icon {
+    margin-bottom: 100px;
+
+    & .fas.fa-code {
+      font-size: 4rem;
+      color: #3d3838;
+    }
+  }
+
+  & > div {
+    width: 95vw;
+    max-width: 600px;
+    text-align: center;
+
+    & h1 {
+      // font-size: 1rem;
+      margin-bottom: 1rem;
+      // font-style: italic
+    }
+
+    & p {
+      // font-size: 1.3rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem
+    }
+  }
+
+  & .signin-signup {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 400px;
+    margin: auto;
+
+    & Button {
+      padding: 0.4rem 2rem !important;
+    }
+  }
+
+}
+
+
+
