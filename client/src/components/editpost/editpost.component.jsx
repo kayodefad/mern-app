@@ -2,10 +2,20 @@ import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
-import { createPost, clearError } from '../../redux/post/post.actions';
+import { editPost, fetchSinglePost } from '../../redux/post/post.actions';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
-const Newpost = ({ createPost, postErrors, clearError, history }) => {
+const Editpost = ({
+  editPost,
+  fetchSinglePost,
+  postErrors,
+  post,
+  history,
+  match: {
+    params: { id }
+  }
+}) => {
   const [postData, setPostData] = useState({
     title: '',
     body: '',
@@ -13,7 +23,16 @@ const Newpost = ({ createPost, postErrors, clearError, history }) => {
   });
 
   useEffect(() => {
-    setPostData({ ...postData, errors: postErrors });
+    axios
+      .get(`/api/posts/${id}`)
+      .then(res =>
+        setPostData({ ...postData, title: res.data.title, body: res.data.body })
+      )
+      .catch(e => console.log(e));
+    setPostData({
+      ...postData,
+      errors: postErrors
+    });
   }, [postErrors]);
 
   const onChange = e => {
@@ -25,7 +44,7 @@ const Newpost = ({ createPost, postErrors, clearError, history }) => {
   const onSubmit = e => {
     e.preventDefault();
     const { title, body } = postData;
-    createPost({ title, body }, history);
+    editPost(id, { title, body }, history);
   };
 
   const { title, body, errors } = postData;
@@ -68,20 +87,22 @@ const Newpost = ({ createPost, postErrors, clearError, history }) => {
   );
 };
 
-Newpost.propTypes = {
-  createPost: PropTypes.func.isRequired,
+Editpost.propTypes = {
+  editPost: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   postErrors: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({ user, postErrors }) => ({
+const mapStateToProps = ({ user, postErrors, posts: { post } }) => ({
   user,
-  postErrors
+  postErrors,
+  post
 });
 
 const mapDispatchToProps = dispatch => ({
-  createPost: (postData, history) => dispatch(createPost(postData, history)),
-  clearError: () => dispatch(clearError())
+  editPost: (id, postData, history) =>
+    dispatch(editPost(id, postData, history)),
+  fetchSinglePost: id => dispatch(fetchSinglePost(id))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Newpost);
+export default connect(mapStateToProps, mapDispatchToProps)(Editpost);

@@ -3,12 +3,14 @@
   padding: 20px;
   border: none;
 
-  // & .owner {
-
-  // }
-
   & .readmore {
     color: rgb(35, 126, 211);
     cursor: pointer
   }
+
+  // & .modal-body {
+  //   background: #fff;
+  //   text-align: center;
+  //   width: 200px !important
+  // }
 }

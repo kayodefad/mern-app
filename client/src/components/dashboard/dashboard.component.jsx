@@ -17,7 +17,7 @@ const Dashboard = ({
 }) => {
   useEffect(() => {
     fetchPosts();
-    fetchPaginatedPosts(activePage);
+    fetchPaginatedPosts(1);
   }, []);
 
   const { currentUser } = user;
@@ -36,11 +36,15 @@ const Dashboard = ({
       <Link to="/newpost">
         <Button variant="primary">New Post</Button>
       </Link>
+
       <Pagination posts={blogPosts} fetchPaginatedPosts={fetchPaginatedPosts} />
+
       <div>{`Showing ${activePage*3-2} to ${activePage * 3} of ${blogPosts.length} posts`}</div>
+      
       {paginatedPosts.map(post => (
         <Blogpost key={post._id} {...post} />
       ))}
+
       <div className="mt-3">{`Showing ${activePage*3-2} to ${activePage * 3} of ${blogPosts.length} posts`}</div>
     </div>
   );

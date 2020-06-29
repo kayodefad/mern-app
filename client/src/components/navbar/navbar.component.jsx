@@ -1,29 +1,40 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import { logoutUser } from '../../redux/user/user.actions';
+import { fetchAllMyPosts } from '../../redux/post/post.actions';
 
-const NavBar = ({ user, logoutUser }) => {
+const NavBar = ({ history, user, logoutUser, fetchAllMyPosts }) => {
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
         <Link to="/">
-          <Navbar.Brand><i className="fas fa-code"></i> MERNAPP</Navbar.Brand>
+          <Navbar.Brand>
+            <i className="fas fa-code"></i> MERNAPP
+          </Navbar.Brand>
         </Link>
         <Nav className="ml-auto">
           {user.isAuthenticated ? (
             <>
-            {/* <Button variant="secondary" size="sm">
-              My Posts
-            </Button> */}
-            <Button className="ml-3" onClick={() => logoutUser()} variant="primary" size="sm">
-              Logout
-            </Button>
-              </>
+              <Link to='/myposts'>
+              <Button
+                variant="secondary"
+                size="sm">
+                My Posts
+              </Button>
+              </Link>
+              <Button
+                className="ml-3"
+                onClick={() => logoutUser()}
+                variant="primary"
+                size="sm">
+                Logout
+              </Button>
+            </>
           ) : (
             <>
               <Link to="/register">
@@ -49,7 +60,8 @@ const mapStateToProps = ({ user }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  logoutUser: () => dispatch(logoutUser())
+  logoutUser: () => dispatch(logoutUser()),
+  fetchAllMyPosts: (history) => dispatch(fetchAllMyPosts(history))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavBar));
