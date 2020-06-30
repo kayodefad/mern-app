@@ -22,7 +22,7 @@ const NavBar = ({ history, user, logoutUser, fetchAllMyPosts }) => {
             <>
               <Link to='/myposts'>
               <Button
-                variant="secondary"
+                variant="success"
                 size="sm">
                 My Posts
               </Button>
@@ -43,7 +43,7 @@ const NavBar = ({ history, user, logoutUser, fetchAllMyPosts }) => {
                 </Button>
               </Link>
               <Link to="/login">
-                <Button className="ml-3" variant="secondary" size="sm">
+                <Button className="ml-3" variant="success" size="sm">
                   Login
                 </Button>
               </Link>
