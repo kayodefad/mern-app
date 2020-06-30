@@ -20,8 +20,8 @@ const Landing = ({ user, history }) => {
       <div>
         <h1>MERNAPP</h1>
         <p>
-          Welcome to a simple full-stack MERN App with Authentication. Still a
-          work in progress.
+          Welcome to a simple full-stack MERN App with Passport-JWT
+          Authentication. Still a work in progress.
         </p>
         <div className="signin-signup">
           <Link to="/register">
