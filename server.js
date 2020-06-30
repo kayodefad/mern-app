@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const path = require('path')
 
 mongoose
@@ -19,6 +20,8 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
+
+app.use(cors());
 
 app.use('/api/users', require('./routes/user'));
 app.use('/api/posts', require('./routes/post'));

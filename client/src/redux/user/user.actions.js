@@ -79,4 +79,8 @@ export const logoutUser = () => dispatch => {
   setAuthToken(false)
   // Set current user to null
   dispatch(setCurrentUser(null))
+  dispatch({
+    type: 'SET_ACTIVE_PAGE',
+    payload: 1
+  })
 }
