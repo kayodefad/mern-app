@@ -108,9 +108,9 @@ Editpost.propTypes = {
   postErrors: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({ user, postErrors, posts: { post, isLoading } }) => ({
+const mapStateToProps = ({ user, posts: { post, isLoading, errors } }) => ({
   user,
-  postErrors,
+  postErrors: errors,
   post,
   isLoading
 });
