@@ -5,11 +5,17 @@ import axios from 'axios'
 
 // Create Post
 export const createPost = (postData, history) => async (dispatch, getState) => {
+  dispatch({
+    type: actionTypes.POST_LOADING
+  })
   try {
     await axios.post('/api/posts/newpost', {
       ...postData,
       author: getState().user.currentUser._id,
       owner: getState().user.currentUser.name
+    })
+    dispatch({
+      type: actionTypes.CREATE_NEW_POST
     })
     history.push('/dashboard')
   } catch (e) {
@@ -19,6 +25,9 @@ export const createPost = (postData, history) => async (dispatch, getState) => {
 
 // Fetch All Posts
 export const fetchPosts = () => async dispatch => {
+  dispatch({
+    type: actionTypes.POST_LOADING
+  })
   try {
     const response = await axios.get('/api/posts')
     dispatch({
@@ -32,6 +41,9 @@ export const fetchPosts = () => async dispatch => {
 
 // Fetch Single Post
 export const fetchSinglePost = (id) => async dispatch => {
+  dispatch({
+    type: actionTypes.POST_LOADING
+  })
   try {
     const response = await axios.get(`/api/posts/${id}`)
     dispatch({
@@ -45,6 +57,9 @@ export const fetchSinglePost = (id) => async dispatch => {
 
 // Fetch Paginated Posts
 export const fetchPaginatedPosts = (pageNumber) => async dispatch => {
+  dispatch({
+    type: actionTypes.POST_LOADING
+  })
   try {
     const response = await axios.get(`/api/posts/pages?page=${pageNumber}&limit=3`)
     dispatch({
@@ -58,6 +73,9 @@ export const fetchPaginatedPosts = (pageNumber) => async dispatch => {
 
 // Fetch All Posts
 export const fetchAllMyPosts = () => async (dispatch, getState) => {
+  dispatch({
+    type: actionTypes.POST_LOADING
+  })
   try {
     const response = await axios.get(`/api/posts/me/${getState().user.currentUser._id}`)
     dispatch({

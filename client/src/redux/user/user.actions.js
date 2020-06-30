@@ -16,6 +16,7 @@ export const registerUser = (userData, history) => async dispatch => {
     dispatch({
       type: actionTypes.REGISTER_USER
     })
+    dispatch(clearErrors())
     history.push('/login')
   } catch (e) {
     dispatch(getErrors(e.response.data))
@@ -41,6 +42,7 @@ export const loginUser = (userData) => async dispatch => {
     const decoded = jwt_decode(token)
     // Set current user
     dispatch(setCurrentUser(decoded))
+    dispatch(clearErrors())
   } catch (e) {
     dispatch(getErrors(e.response.data))
   }

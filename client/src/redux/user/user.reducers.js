@@ -30,7 +30,7 @@ const userReducer = (state = initialState, action) => {
           }
           case actionTypes.CLEAR_ERRORS:
             return {
-              ...state, errors: {}
+              ...state, errors: {}, loading: false
             }
             default:
               return state;

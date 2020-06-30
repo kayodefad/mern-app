@@ -17,32 +17,40 @@ const postsReducer = (state = initialState, action) => {
       return {
         ...state, isLoading: true
       }
-      case actionTypes.FETCH_POSTS:
+      case actionTypes.CREATE_NEW_POST:
         return {
-          ...state, posts: action.payload
+          ...state, isLoading: false
         }
-        case actionTypes.FETCH_SINGLE_POST:
+        case actionTypes.FETCH_POSTS:
           return {
-            ...state, post: action.payload
+            ...state, posts: action.payload, isLoading: false
           }
-          case actionTypes.FETCH_PAGINATED_POSTS:
+          case actionTypes.FETCH_SINGLE_POST:
             return {
-              ...state, paginatedPosts: action.payload
+              ...state, post: action.payload, isLoading: false
             }
-            case actionTypes.SET_ACTIVE_PAGE:
+            case actionTypes.FETCH_PAGINATED_POSTS:
               return {
-                ...state, activePage: action.payload
+                ...state, paginatedPosts: action.payload, isLoading: false
               }
-              case actionTypes.FETCH_ALL_MYPOSTS:
+              case actionTypes.SET_ACTIVE_PAGE:
                 return {
-                  ...state, myPosts: action.payload
+                  ...state, activePage: action.payload
                 }
-                case actionTypes.EDIT_POST:
+                case actionTypes.FETCH_ALL_MYPOSTS:
                   return {
-                    ...state, loading: false
+                    ...state, myPosts: action.payload, isLoading: false
                   }
-                  default:
-                    return state
+                  case actionTypes.EDIT_POST:
+                    return {
+                      ...state, isLoading: false
+                    }
+                    case actionTypes.DELETE_POST:
+                      return {
+                        ...state, isLoading: false
+                      }
+                      default:
+                        return state
   }
 }
 

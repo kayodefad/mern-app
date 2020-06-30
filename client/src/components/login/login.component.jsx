@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 
 import { loginUser } from '../../redux/user/user.actions';
 
@@ -51,7 +52,7 @@ const Login = ({ loginUser, user, history }) => {
           <b>Login</b> below
         </h4>
         <p>
-        Don't have an account? <Link to="/register">Register</Link>
+          Don't have an account? <Link to="/register">Register</Link>
         </p>
       </div>
       <Form noValidate onSubmit={onSubmit}>
@@ -84,7 +85,20 @@ const Login = ({ loginUser, user, history }) => {
         </Form.Group>
 
         <Button variant="success" type="submit" disabled={user.loading}>
-        {user.loading ? 'Loading...' : 'Submit'}
+          {user.loading ? (
+            <>
+              <Spinner
+                as="span"
+                animation="grow"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />{' '}
+              Logging In...
+            </>
+          ) : (
+            'Submit'
+          )}
         </Button>
       </Form>
     </div>

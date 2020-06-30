@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import { connect } from 'react-redux';
 import { createPost, clearError } from '../../redux/post/post.actions';
 import PropTypes from 'prop-types';
 
-const Newpost = ({ createPost, postErrors, clearError, history }) => {
+const Newpost = ({
+  createPost,
+  postErrors,
+  isLoading,
+  clearError,
+  history
+}) => {
   const [postData, setPostData] = useState({
     title: '',
     body: '',
@@ -61,8 +68,21 @@ const Newpost = ({ createPost, postErrors, clearError, history }) => {
         <Form.Text className="text-danger">{errors.body}</Form.Text>
       </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Post
+      <Button variant="primary" type="submit" disabled={isLoading}>
+        {isLoading ? (
+          <>
+            <Spinner
+              as="span"
+              animation="grow"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+            />{' '}
+            Posting...
+          </>
+        ) : (
+          'Post'
+        )}
       </Button>
     </Form>
   );
@@ -74,9 +94,10 @@ Newpost.propTypes = {
   postErrors: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({ user, postErrors }) => ({
+const mapStateToProps = ({ user, postErrors, posts: { isLoading } }) => ({
   user,
-  postErrors
+  postErrors,
+  isLoading
 });
 
 const mapDispatchToProps = dispatch => ({

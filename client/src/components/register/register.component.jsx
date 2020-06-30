@@ -116,12 +116,12 @@ const Register = ({ user, registerUser, clearErrors, history }) => {
             <>
               <Spinner
                 as="span"
-                animation="border"
+                animation="grow"
                 size="sm"
                 role="status"
                 aria-hidden="true"
               />{' '}
-              Loading...
+              Registering...
             </>
           ) : (
             'Submit'

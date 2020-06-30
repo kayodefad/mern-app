@@ -5,12 +5,14 @@ import { connect } from 'react-redux';
 import { editPost, fetchSinglePost } from '../../redux/post/post.actions';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import Spinner from 'react-bootstrap/Spinner';
 
 const Editpost = ({
   editPost,
   fetchSinglePost,
   postErrors,
   post,
+  isLoading,
   history,
   match: {
     params: { id }
@@ -80,8 +82,21 @@ const Editpost = ({
         <Form.Text className="text-danger">{errors.body}</Form.Text>
       </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Post
+      <Button variant="primary" type="submit" disabled={isLoading}>
+        {isLoading ? (
+          <>
+            <Spinner
+              as="span"
+              animation="grow"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+            />{' '}
+            Loading...
+          </>
+        ) : (
+          'Post'
+        )}
       </Button>
     </Form>
   );
@@ -93,10 +108,11 @@ Editpost.propTypes = {
   postErrors: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({ user, postErrors, posts: { post } }) => ({
+const mapStateToProps = ({ user, postErrors, posts: { post, isLoading } }) => ({
   user,
   postErrors,
-  post
+  post,
+  isLoading
 });
 
 const mapDispatchToProps = dispatch => ({

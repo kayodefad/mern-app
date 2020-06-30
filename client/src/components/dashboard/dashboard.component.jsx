@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { fetchPosts, fetchPaginatedPosts } from '../../redux/post/post.actions';
 import Blogpost from '../blogpost/blogpost.component';
 import Pagination from '../pagination/pagination.component';
+import Spinner from 'react-bootstrap/Spinner';
 
 const Dashboard = ({
   user,
@@ -13,7 +14,8 @@ const Dashboard = ({
   fetchPaginatedPosts,
   blogPosts,
   paginatedPosts,
-  activePage
+  activePage,
+  isLoading
 }) => {
   useEffect(() => {
     fetchPosts();
@@ -39,13 +41,26 @@ const Dashboard = ({
 
       <Pagination posts={blogPosts} fetchPaginatedPosts={fetchPaginatedPosts} />
 
-      <div>{`Showing ${activePage*3-2} to ${activePage * 3} of ${blogPosts.length} posts`}</div>
-      
-      {paginatedPosts.map(post => (
-        <Blogpost key={post._id} {...post} />
-      ))}
+      {isLoading ? (
+        <div className="mt-4">
+          <Spinner animation="border" variant="primary" role="status">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        </div>
+      ) : (
+        <>
+          <div>{`Showing ${activePage * 3 - 2} to ${activePage * 3} of ${
+            blogPosts.length
+          } posts`}</div>
 
-      <div className="mt-3">{`Showing ${activePage*3-2} to ${activePage * 3} of ${blogPosts.length} posts`}</div>
+          {paginatedPosts.map(post => (
+            <Blogpost key={post._id} {...post} />
+          ))}
+
+          <div className="mt-4">{`Showing ${activePage * 3 -
+            2} to ${activePage * 3} of ${blogPosts.length} posts`}</div>
+        </>
+      )}
     </div>
   );
 };
@@ -57,12 +72,13 @@ Dashboard.propTypes = {
 
 const mapStateToProps = ({
   user,
-  posts: { posts, paginatedPosts, activePage }
+  posts: { posts, paginatedPosts, activePage, isLoading }
 }) => ({
   user,
   blogPosts: posts,
   paginatedPosts,
-  activePage
+  activePage,
+  isLoading
 });
 
 const mapDispatchToProps = dispatch => ({
