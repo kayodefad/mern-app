@@ -8,7 +8,8 @@ const initialState = {
   paginatedPosts: [],
   activePage: 1,
   myPosts: [],
-  isLoading: false
+  isLoading: false,
+  errors: {}
 }
 
 const postsReducer = (state = initialState, action) => {
@@ -17,40 +18,48 @@ const postsReducer = (state = initialState, action) => {
       return {
         ...state, isLoading: true
       }
-      case actionTypes.CREATE_NEW_POST:
+      case actionTypes.POST_ERROR:
         return {
-          ...state, isLoading: false
+          ...state, errors: action.payload, isLoading: false
         }
-        case actionTypes.FETCH_POSTS:
+        case actionTypes.CLEAR_ERROR:
           return {
-            ...state, posts: action.payload, isLoading: false
+            ...state, errors: {}
           }
-          case actionTypes.FETCH_SINGLE_POST:
+          case actionTypes.CREATE_NEW_POST:
             return {
-              ...state, post: action.payload, isLoading: false
+              ...state, isLoading: false
             }
-            case actionTypes.FETCH_PAGINATED_POSTS:
+            case actionTypes.FETCH_POSTS:
               return {
-                ...state, paginatedPosts: action.payload, isLoading: false
+                ...state, posts: action.payload, isLoading: false
               }
-              case actionTypes.SET_ACTIVE_PAGE:
+              case actionTypes.FETCH_SINGLE_POST:
                 return {
-                  ...state, activePage: action.payload
+                  ...state, post: action.payload, isLoading: false
                 }
-                case actionTypes.FETCH_ALL_MYPOSTS:
+                case actionTypes.FETCH_PAGINATED_POSTS:
                   return {
-                    ...state, myPosts: action.payload, isLoading: false
+                    ...state, paginatedPosts: action.payload, isLoading: false
                   }
-                  case actionTypes.EDIT_POST:
+                  case actionTypes.SET_ACTIVE_PAGE:
                     return {
-                      ...state, isLoading: false
+                      ...state, activePage: action.payload
                     }
-                    case actionTypes.DELETE_POST:
+                    case actionTypes.FETCH_ALL_MYPOSTS:
                       return {
-                        ...state, isLoading: false
+                        ...state, myPosts: action.payload, isLoading: false
                       }
-                      default:
-                        return state
+                      case actionTypes.EDIT_POST:
+                        return {
+                          ...state, isLoading: false
+                        }
+                        case actionTypes.DELETE_POST:
+                          return {
+                            ...state, isLoading: false
+                          }
+                          default:
+                            return state
   }
 }
 

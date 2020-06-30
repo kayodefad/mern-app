@@ -94,9 +94,9 @@ Newpost.propTypes = {
   postErrors: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({ user, postErrors, posts: { isLoading } }) => ({
+const mapStateToProps = ({ user, posts: { errors, isLoading } }) => ({
   user,
-  postErrors,
+  postErrors: errors,
   isLoading
 });
 

@@ -6,8 +6,7 @@ import postsReducer from './post/post.reducer'
 
 const rootReducer = combineReducers({
   user: userReducer,
-  posts: postsReducer,
-  postErrors: postErrorReducer
+  posts: postsReducer
 });
 
 export default rootReducer;
