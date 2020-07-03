@@ -6,9 +6,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 
-import { loginUser } from '../../redux/user/user.actions';
+import { loginUser, clearErrors } from '../../redux/user/user.actions';
 
-const Login = ({ loginUser, user, history }) => {
+const Login = ({ loginUser, clearErrors, user, history }) => {
   const [credentials, setCredentials] = useState({
     email: '',
     password: '',
@@ -21,6 +21,12 @@ const Login = ({ loginUser, user, history }) => {
     }
 
     setCredentials({ ...credentials, errors: user.errors });
+
+    return () => {
+      if (Object.keys(user.errors).length !== 0) {
+        clearErrors()
+      }
+    }
   }, [user]);
 
   const onChange = e => {
@@ -115,7 +121,8 @@ const mapStateToProps = ({ user }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loginUser: user => dispatch(loginUser(user))
+  loginUser: user => dispatch(loginUser(user)),
+  clearErrors: () => dispatch(clearErrors())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

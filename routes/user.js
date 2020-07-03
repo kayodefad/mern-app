@@ -70,7 +70,8 @@ router.post('/login', async (req, res) => {
 
 	if (!user) {
 		return res.status(400).json({
-			email: 'Email incorrect'
+			email: 'Email or password incorrect',
+			password: 'Email or password incorrect'
 		});
 	}
 
@@ -79,7 +80,8 @@ router.post('/login', async (req, res) => {
 
 	if (!isMatch) {
 		return res.status(400).json({
-			password: 'Password incorrect'
+			email: 'Email or password incorrect',
+			password: 'Email or password incorrect'
 		});
 	}
 

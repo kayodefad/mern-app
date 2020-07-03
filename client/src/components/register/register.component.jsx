@@ -6,8 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 
-import { registerUser } from '../../redux/user/user.actions';
-import { clearErrors } from '../../redux/user/user.actions';
+import { registerUser, clearErrors } from '../../redux/user/user.actions';
 
 const Register = ({ user, registerUser, clearErrors, history }) => {
   const [credentials, setCredentials] = useState({
@@ -24,6 +23,12 @@ const Register = ({ user, registerUser, clearErrors, history }) => {
     }
 
     setCredentials({ ...credentials, errors: user.errors });
+
+    return () => {
+      if (Object.keys(user.errors).length !== 0) {
+        clearErrors()
+      }
+    }
   }, [user]);
 
   const onChange = e => {
