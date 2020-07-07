@@ -54,7 +54,7 @@ const Editpost = ({
   return (
     <Form
       onSubmit={onSubmit}
-      className="mt-5 mx-auto"
+      className="mt-2 mx-auto"
       style={{ width: '90vw', maxWidth: '500px' }}>
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Title</Form.Label>

@@ -47,7 +47,7 @@ const Register = ({ user, registerUser, clearErrors, history }) => {
   const { name, email, password, password2, errors } = credentials;
 
   return (
-    <div style={{ margin: '3rem auto', width: '90vw', maxWidth: '500px' }}>
+    <div style={{ margin: '1rem auto', width: '90vw', maxWidth: '500px' }}>
       <Link to="/">
         <i className="fas fa-arrow-left"></i> Back to home
       </Link>
@@ -71,42 +71,42 @@ const Register = ({ user, registerUser, clearErrors, history }) => {
             value={name}
             style={{ borderColor: `${errors.name ? 'red' : ''}` }}
           />
-          <Form.Text className="text-danger">{errors.name}</Form.Text>
+          <Form.Text className="text-danger font-italic">{errors.name}</Form.Text>
         </Form.Group>
 
         <Form.Group controlId="email">
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
-            placeholder="jdoe@email.com"
+            placeholder="johndoe@email.com"
             onChange={onChange}
             error={errors.email}
             name="email"
             value={email}
             style={{ borderColor: `${errors.email ? 'red' : ''}` }}
           />
-          <Form.Text className="text-danger">{errors.email}</Form.Text>
+          <Form.Text className="text-danger font-italic">{errors.email}</Form.Text>
         </Form.Group>
 
         <Form.Group controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
-            placeholder="Password"
+            placeholder="password"
             onChange={onChange}
             error={errors.password}
             name="password"
             value={password}
             style={{ borderColor: `${errors.password ? 'red' : ''}` }}
           />
-          <Form.Text className="text-danger">{errors.password}</Form.Text>
+          <Form.Text className="text-danger font-italic">{errors.password}</Form.Text>
         </Form.Group>
 
         <Form.Group controlId="confirm_password">
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type="password"
-            placeholder="Confirm Password"
+            placeholder="confirm password"
             onChange={onChange}
             error={errors.password2}
             name="password2"

@@ -27,7 +27,7 @@ const Dashboard = ({
   return (
     <div
       style={{ width: '85vw', maxWidth: '520px' }}
-      className="mt-5 mb-5 mx-auto">
+      className="mt-2 mb-5 mx-auto">
       <h4>
         <b>Hey there,</b> {currentUser.name.split(' ')[0]}
         <p className="mt-2">

@@ -49,7 +49,7 @@ const Login = ({ loginUser, clearErrors, user, history }) => {
   const { email, password, errors } = credentials;
 
   return (
-    <div style={{ margin: '3rem auto', width: '90vw', maxWidth: '500px' }}>
+    <div style={{ margin: '1rem auto', width: '90vw', maxWidth: '500px' }}>
       <Link to="/">
         <i className="fas fa-arrow-left"></i> Back to home
       </Link>
@@ -66,28 +66,28 @@ const Login = ({ loginUser, clearErrors, user, history }) => {
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
-            placeholder="jdoe@email.com"
+            placeholder="johndoe@email.com"
             onChange={onChange}
             error={errors.email}
             name="email"
             value={email}
             style={{ borderColor: `${errors.email ? 'red' : ''}` }}
           />
-          <Form.Text className="text-danger">{errors.email}</Form.Text>
+          <Form.Text className="text-danger font-italic">{errors.email}</Form.Text>
         </Form.Group>
 
         <Form.Group controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
-            placeholder="Password"
+            placeholder="password"
             onChange={onChange}
             error={errors.password}
             name="password"
             value={password}
             style={{ borderColor: `${errors.password ? 'red' : ''}` }}
           />
-          <Form.Text className="text-danger">{errors.password}</Form.Text>
+          <Form.Text className="text-danger font-italic">{errors.password}</Form.Text>
         </Form.Group>
 
         <Button variant="success" type="submit" disabled={user.loading}>

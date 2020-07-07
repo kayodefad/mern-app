@@ -31,13 +31,13 @@ const Singlepost = ({
   return (
     <>
       {isLoading ? (
-        <div className="Singlepost mt-4 mb-4">
+        <div className="Singlepost mt-2 mb-4">
           <Spinner animation="border" variant="primary" role="status">
             <span className="sr-only">Loading...</span>
           </Spinner>
         </div>
       ) : (
-        <div className="Singlepost mt-4 mb-4">
+        <div className="Singlepost mt-2 mb-4">
           <h3>{post.title}</h3>
           <div className="owner">
             <p className="mb-1">{post.owner}</p>
