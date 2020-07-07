@@ -113,7 +113,7 @@ const Register = ({ user, registerUser, clearErrors, history }) => {
             value={password2}
             style={{ borderColor: `${errors.password2 ? 'red' : ''}` }}
           />
-          <Form.Text className="text-danger">{errors.password2}</Form.Text>
+          <Form.Text className="text-danger font-italic">{errors.password2}</Form.Text>
         </Form.Group>
 
         <Button variant="primary" type="submit" disabled={user.loading}>
