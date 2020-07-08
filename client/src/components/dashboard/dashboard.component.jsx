@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
-import { fetchPosts, fetchPaginatedPosts } from '../../redux/post/post.actions';
+import { fetchPosts, fetchPaginatedPosts, setActivePage } from '../../redux/post/post.actions';
 import Blogpost from '../blogpost/blogpost.component';
 import Pagination from '../pagination/pagination.component';
 import Spinner from 'react-bootstrap/Spinner';
@@ -12,6 +12,7 @@ const Dashboard = ({
   user,
   fetchPosts,
   fetchPaginatedPosts,
+  setActivePage,
   blogPosts,
   paginatedPosts,
   activePage,
@@ -20,6 +21,7 @@ const Dashboard = ({
   useEffect(() => {
     fetchPosts();
     fetchPaginatedPosts(1);
+    setActivePage(1)
   }, []);
 
   const { currentUser } = user;
@@ -83,7 +85,8 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = dispatch => ({
   fetchPosts: () => dispatch(fetchPosts()),
-  fetchPaginatedPosts: pageNumber => dispatch(fetchPaginatedPosts(pageNumber))
+  fetchPaginatedPosts: pageNumber => dispatch(fetchPaginatedPosts(pageNumber)),
+  setActivePage: (pageNumber) => dispatch(setActivePage(pageNumber))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

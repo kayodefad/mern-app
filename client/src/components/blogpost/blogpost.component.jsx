@@ -66,7 +66,7 @@ const Blogpost = props => {
               padding: '20px',
               borderRadius: '5px'
             }}>
-            <p>Are You Sure?</p>
+            <p style={{color: '#000'}}>Are You Sure?</p>
             <div>
               <Button
                 onClick={() => setShow(!show)}
