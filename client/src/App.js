@@ -1,11 +1,11 @@
 import React, {
-  useState,
-  useEffect
+  useContext
 } from 'react';
 import {
   Route,
   Switch
 } from 'react-router-dom';
+import {themes, ThemeContext} from './contexts/ThemeContext'
 
 import './App.scss';
 import Navbar from './components/navbar/navbar.component';
@@ -23,39 +23,13 @@ import NotFound from './components/notfound/notfound.component'
 import ToggleSwitch from './components/toggle-switch/toggle-switch.component'
 
 const App = () => {
-  const [theme, setTheme] = useState({
-    light: true
-  })
-
-  useEffect(() => {
-    if (localStorage.getItem('theme') !== null) {
-      const themevalue = localStorage.getItem('theme') === 'false' ? false : true
-      setTheme({
-        light: themevalue
-      })
-    }
-    console.log(localStorage.getItem('theme'))
-  }, [])
-
-  const style = theme.light ? {
-    background: '#fff',
-    color: '#000'
-  } : {
-    background: '#191a19',
-    color: '#fff'
-  }
-
-  const onToggle = () => {
-    setTheme({
-      light: !theme.light
-    })
-    localStorage.setItem('theme', !theme.light)
-  }
-  return ( 
-    <div style = {style}>
+  const {theme} = useContext(ThemeContext)
+  const themeValues = theme.light ? themes.light : themes.dark
+  return (
+    <div style={{background: themeValues.background, color: themeValues.foreground}}>
       <div className = 'App'>
         <Navbar />
-        <ToggleSwitch onToggle={onToggle} />
+        <ToggleSwitch />
         <Switch >
           <Route exact path = '/' component = {Landing} /> 
           <Route path = '/register' component = {Register} /> 
@@ -69,7 +43,7 @@ const App = () => {
         </Switch> 
       </div>
         <Footer />
-    </div>
+      </div>
   );
 };
 

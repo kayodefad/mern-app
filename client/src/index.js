@@ -5,7 +5,8 @@ import { Provider } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import jwt_decode from 'jwt-decode'
 import setAuthToken from './utils/setAuthToken'
-import {setCurrentUser} from './redux/user/user.actions'
+import { setCurrentUser } from './redux/user/user.actions'
+import ThemeContextProvider from './contexts/ThemeContext'
 
 import './index.css';
 import App from './App';
@@ -29,11 +30,13 @@ if (localStorage.jwtToken) {
 
 ReactDOM.render(
   <Provider store={store}>
+    <ThemeContextProvider>
       <BrowserRouter>
       <React.StrictMode>
         <App />
       </React.StrictMode>
-    </BrowserRouter>
+      </BrowserRouter>
+    </ThemeContextProvider>
   </Provider>,
   document.getElementById('root')
 );
