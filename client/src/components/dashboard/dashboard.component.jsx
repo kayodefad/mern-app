@@ -28,7 +28,7 @@ const Dashboard = ({
 
   return (
     <div
-      style={{ width: '85vw', maxWidth: '520px' }}
+      style={{ width: '85vw', maxWidth: '800px' }}
       className="mt-2 mb-5 mx-auto">
       <h4>
         <b>Hey there,</b> {currentUser.name.split(' ')[0]}

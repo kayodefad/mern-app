@@ -4,11 +4,11 @@ export const ThemeContext = createContext()
 
 export const themes = {
   light: {
-    background: '#fff',
+    background: '#e6e9eb',
     foreground: '#000'
   },
   dark: {
-    background: '#191a19',
+    background: '#2f303a',
     foreground: '#fff'
   }
 }
