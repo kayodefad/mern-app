@@ -14,9 +14,9 @@ const PrivateRoute = ({ user, component: Component, ...otherProps }) => {
           <Redirect to="/login" />
         )
       }
-    />
+    />   
   );
-};
+};  
 
 PrivateRoute.propTypes = {
   user: PropTypes.object.isRequired

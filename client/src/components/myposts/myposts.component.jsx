@@ -12,10 +12,13 @@ const Myposts = ({ myPosts, isLoading, fetchAllMyPosts }) => {
   }, []);
 
   const noPosts = (
-    <div style={{height: 'calc(100vh - 200px - 54px)'}} className="text-center d-flex flex-column align-items-center justify-content-center">
+    <div
+      style={{ height: 'calc(100vh - 200px - 54px)' }}
+      className='text-center d-flex flex-column align-items-center justify-content-center'
+    >
       <h3>You Have No Posts Yet</h3>
-      <Link to="/newpost">
-        <Button className="mt-3" variant="primary">
+      <Link to='/newpost'>
+        <Button className='mt-3' variant='primary'>
           Create First Post
         </Button>
       </Link>
@@ -27,15 +30,17 @@ const Myposts = ({ myPosts, isLoading, fetchAllMyPosts }) => {
       {isLoading ? (
         <div
           style={{ width: '85vw', maxWidth: '520px' }}
-          className="mt-2 mb-5 mx-auto">
-          <Spinner animation="border" variant="primary" role="status">
-            <span className="sr-only">Loading...</span>
+          className='mt-2 mb-5 mx-auto'
+        >
+          <Spinner animation='border' variant='primary' role='status'>
+            <span className='sr-only'>Loading...</span>
           </Spinner>
         </div>
       ) : (
         <div
           style={{ width: '85vw', maxWidth: '520px' }}
-          className="mt-2 mb-5 mx-auto">
+          className='mt-2 mb-5 mx-auto'
+        >
           {myPosts.length === 0
             ? noPosts
             : myPosts.map(post => (
@@ -49,11 +54,11 @@ const Myposts = ({ myPosts, isLoading, fetchAllMyPosts }) => {
 
 const mapStateToProps = ({ posts: { myPosts, isLoading } }) => ({
   myPosts,
-  isLoading
+  isLoading,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchAllMyPosts: () => dispatch(fetchAllMyPosts())
+  fetchAllMyPosts: () => dispatch(fetchAllMyPosts()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Myposts);

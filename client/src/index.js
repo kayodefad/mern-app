@@ -10,7 +10,7 @@ import ThemeContextProvider from './contexts/ThemeContext'
 
 import './index.css';
 import App from './App';
-import {store} from './redux/store'
+import {store} from './redux/store' 
 import * as serviceWorker from './serviceWorker';
 
 if (localStorage.jwtToken) {

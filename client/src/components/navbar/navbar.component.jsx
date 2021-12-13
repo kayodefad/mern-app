@@ -10,40 +10,39 @@ import { fetchAllMyPosts } from '../../redux/post/post.actions';
 
 const NavBar = ({ history, user, logoutUser, fetchAllMyPosts }) => {
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg='dark' variant='dark'>
       <Container>
-        <Link to="/">
+        <Link to='/'>
           <Navbar.Brand>
-            <i className="fas fa-code"></i> MERNAPP
+            <i className='fas fa-code'></i> MERNAPP
           </Navbar.Brand>
         </Link>
-        <Nav className="ml-auto">
+        <Nav className='ml-auto'>
           {user.isAuthenticated ? (
             <>
               <Link to='/myposts'>
-              <Button
-                variant="success"
-                size="sm">
-                My Posts
-              </Button>
+                <Button variant='success' size='sm'>
+                  My Posts
+                </Button>
               </Link>
               <Button
-                className="ml-3"
+                className='ml-3'
                 onClick={() => logoutUser()}
-                variant="primary"
-                size="sm">
+                variant='primary'
+                size='sm'
+              >
                 Logout
               </Button>
             </>
           ) : (
             <>
-              <Link to="/register">
-                <Button variant="primary" size="sm">
+              <Link to='/register'>
+                <Button variant='primary' size='sm'>
                   Register
                 </Button>
               </Link>
-              <Link to="/login">
-                <Button className="ml-3" variant="success" size="sm">
+              <Link to='/login'>
+                <Button className='ml-3' variant='success' size='sm'>
                   Login
                 </Button>
               </Link>
@@ -56,12 +55,12 @@ const NavBar = ({ history, user, logoutUser, fetchAllMyPosts }) => {
 };
 
 const mapStateToProps = ({ user }) => ({
-  user
+  user,
 });
 
 const mapDispatchToProps = dispatch => ({
   logoutUser: () => dispatch(logoutUser()),
-  fetchAllMyPosts: (history) => dispatch(fetchAllMyPosts(history))
+  fetchAllMyPosts: history => dispatch(fetchAllMyPosts(history)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavBar));

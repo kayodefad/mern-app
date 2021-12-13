@@ -13,26 +13,46 @@ const Paginate = ({ posts, fetchPaginatedPosts, setActivePage }) => {
     setActivePage(number);
   };
 
+  const previousPageClick = () => {
+    fetchPaginatedPosts(active - 1);
+    setActive(active - 1);
+    setActivePage(active - 1);
+  };
+
+  const nextPageClick = () => {
+    fetchPaginatedPosts(active + 1);
+    setActive(active + 1);
+    setActivePage(active + 1);
+  };
+
   for (let i = 1; i <= Math.ceil(posts.length / 3); i++) {
     pageNumbers.push(
       <Pagination.Item
         key={i}
         onClick={() => pageNumberClick(i)}
-        active={i === active}>
+        active={i === active}
+      >
         {i}
       </Pagination.Item>
     );
   }
 
   return (
-    <div className="mt-3">
-      <Pagination>{pageNumbers}</Pagination>
+    <div className='mt-3' style={{ overflow: 'scroll' }}>
+      <Pagination>
+        <Pagination.Prev disabled={active === 1} onClick={previousPageClick} />
+        {pageNumbers}
+        <Pagination.Next
+          disabled={active === Math.ceil(posts.length / 3)}
+          onClick={nextPageClick}
+        />
+      </Pagination>
     </div>
   );
 };
 
 const mapDispatchToProps = dispatch => ({
-  setActivePage: pageNumber => dispatch(setActivePage(pageNumber))
+  setActivePage: pageNumber => dispatch(setActivePage(pageNumber)),
 });
 
 export default connect(null, mapDispatchToProps)(Paginate);

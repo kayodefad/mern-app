@@ -9,8 +9,8 @@ const Singlepost = ({
   fetchSinglePost,
   isLoading,
   match: {
-    params: { id }
-  }
+    params: { id },
+  },
 }) => {
   useEffect(() => {
     fetchSinglePost(id);
@@ -20,7 +20,7 @@ const Singlepost = ({
     weekday: 'long',
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   };
 
   const datePosted = new Date(post.createdAt).toLocaleDateString(
@@ -31,16 +31,16 @@ const Singlepost = ({
   return (
     <>
       {isLoading ? (
-        <div className="Singlepost mt-2 mb-4">
-          <Spinner animation="border" variant="primary" role="status">
-            <span className="sr-only">Loading...</span>
+        <div className='Singlepost mt-2 mb-4'>
+          <Spinner animation='border' variant='primary' role='status'>
+            <span className='sr-only'>Loading...</span>
           </Spinner>
         </div>
       ) : (
-        <div className="Singlepost mt-2 mb-4">
+        <div className='Singlepost mt-2 mb-4'>
           <h3>{post.title}</h3>
-          <div className="owner">
-            <p className="mb-1">{post.owner}</p>
+          <div className='owner'>
+            <p className='mb-1'>{post.owner}</p>
             <p>{datePosted}</p>
           </div>
           <p>{post.body}</p>
@@ -52,11 +52,11 @@ const Singlepost = ({
 
 const mapStateToProps = ({ posts: { post, isLoading } }) => ({
   post,
-  isLoading
+  isLoading,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchSinglePost: id => dispatch(fetchSinglePost(id))
+  fetchSinglePost: id => dispatch(fetchSinglePost(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Singlepost);

@@ -9,19 +9,17 @@ import Spinner from 'react-bootstrap/Spinner';
 
 const Editpost = ({
   editPost,
-  fetchSinglePost,
   postErrors,
-  post,
   isLoading,
   history,
   match: {
-    params: { id }
-  }
+    params: { id },
+  },
 }) => {
   const [postData, setPostData] = useState({
     title: '',
     body: '',
-    errors: {}
+    errors: {},
   });
 
   useEffect(() => {
@@ -33,7 +31,7 @@ const Editpost = ({
       .catch(e => console.log(e));
     setPostData({
       ...postData,
-      errors: postErrors
+      errors: postErrors,
     });
   }, [postErrors]);
 
@@ -54,43 +52,44 @@ const Editpost = ({
   return (
     <Form
       onSubmit={onSubmit}
-      className="mt-2 mx-auto"
-      style={{ width: '90vw', maxWidth: '500px' }}>
-      <Form.Group controlId="formBasicEmail">
+      className='mt-2 mx-auto'
+      style={{ width: '90vw', maxWidth: '500px' }}
+    >
+      <Form.Group controlId='formBasicEmail'>
         <Form.Label>Title</Form.Label>
         <Form.Control
-          type="text"
-          placeholder="Enter title"
+          type='text'
+          placeholder='Enter title'
           value={title}
-          name="title"
+          name='title'
           onChange={onChange}
           style={{ borderColor: `${errors.title ? 'red' : ''}` }}
         />
-        <Form.Text className="text-danger">{errors.title}</Form.Text>
+        <Form.Text className='text-danger'>{errors.title}</Form.Text>
       </Form.Group>
 
-      <Form.Group controlId="exampleForm.ControlTextarea1">
+      <Form.Group controlId='exampleForm.ControlTextarea1'>
         <Form.Label>Body</Form.Label>
         <Form.Control
-          as="textarea"
-          rows="5"
+          as='textarea'
+          rows='5'
           value={body}
-          name="body"
+          name='body'
           onChange={onChange}
           style={{ borderColor: `${errors.title ? 'red' : ''}` }}
         />
-        <Form.Text className="text-danger">{errors.body}</Form.Text>
+        <Form.Text className='text-danger'>{errors.body}</Form.Text>
       </Form.Group>
 
-      <Button variant="primary" type="submit" disabled={isLoading}>
+      <Button variant='primary' type='submit' disabled={isLoading}>
         {isLoading ? (
           <>
             <Spinner
-              as="span"
-              animation="grow"
-              size="sm"
-              role="status"
-              aria-hidden="true"
+              as='span'
+              animation='grow'
+              size='sm'
+              role='status'
+              aria-hidden='true'
             />{' '}
             Loading...
           </>
@@ -105,20 +104,20 @@ const Editpost = ({
 Editpost.propTypes = {
   editPost: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
-  postErrors: PropTypes.object.isRequired
+  postErrors: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = ({ user, posts: { post, isLoading, errors } }) => ({
   user,
   postErrors: errors,
   post,
-  isLoading
+  isLoading,
 });
 
 const mapDispatchToProps = dispatch => ({
   editPost: (id, postData, history) =>
     dispatch(editPost(id, postData, history)),
-  fetchSinglePost: id => dispatch(fetchSinglePost(id))
+  fetchSinglePost: id => dispatch(fetchSinglePost(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editpost);
